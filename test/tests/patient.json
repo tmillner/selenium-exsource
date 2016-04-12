@@ -1,0 +1,14 @@
+{
+  [
+    {"TEST" : {
+        "firstPatientId" : 1,
+        "firstPatientName" : "Maitiú"
+        }
+    },
+    {"PROD" : {
+        "firstPatientId" : 100,
+        "firstPatientName" : "Arlene"
+      }
+    }
+  ]
+}

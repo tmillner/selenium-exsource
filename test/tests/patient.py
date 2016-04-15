@@ -5,11 +5,8 @@ import unittest
 # Desired outsourced data
 class PatientTest(Framework):
 
-  def __init__(self):
-    super(PatientTest, self).__init__()
-
-  def test_patient_page():
-    print "done"
+  def runTest(self):
+    print self.context
     
 if __name__ == '__main__':
   unittest.main()

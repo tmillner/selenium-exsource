@@ -18,6 +18,9 @@ class Framework(TestCase):
             {"name": "PROD", "domain": "localhost"}
         ]
 
+    def groups():
+        pass
+
     def __init__(self, args):
         super(Framework, self).__init__()
         self.args = args

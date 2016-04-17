@@ -11,7 +11,7 @@ class PatientPage(Page):
         super(PatientPage, self).__init__()
         self.pageInfo["path"] = "patients"
 
-
+@Framework.groups("simple", "example")
 class PatientTest(Framework):
 
     def runTest(self):

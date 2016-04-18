@@ -11,7 +11,7 @@ class PatientPage(Page):
         super(PatientPage, self).__init__()
         self.pageInfo["path"] = "patients"
 
-@Framework.groups("simple", "example")
+#@Framework.groups("simple", "example")
 class PatientTest(Framework):
 
     def runTest(self):
@@ -24,6 +24,7 @@ class PatientTest(Framework):
 
     def test_patient(self):
         """Only this method will run if ran via TestLoader (discover)"""
+        print "jj"
         print self.context
 
 if __name__ == '__main__':

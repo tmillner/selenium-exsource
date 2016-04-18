@@ -1,5 +1,5 @@
-#!/usr/bin/python
 from unittest import TestCase
+import unittest
 from logger import log
 import inspect
 import json
@@ -21,8 +21,9 @@ class Framework(TestCase):
     def groups():
         pass
 
+
     def __init__(self, args):
-        super(Framework, self).__init__()
+        super(Framework, self).__init__(args)
         self.args = args
         self.context = self._get_context()
         if self.context:
@@ -77,3 +78,7 @@ class Framework(TestCase):
             msg = str.format("{}\n{}", "Using context " + self.context,
                              err.message)
             exit("Didn't find the target context in the json: " + msg)
+
+
+if __name__ == "__main__":
+    unittest.main()

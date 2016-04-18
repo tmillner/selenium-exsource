@@ -17,10 +17,7 @@ class Framework(TestCase):
             {"name": "TEST", "domain": "localhost"},
             {"name": "PROD", "domain": "localhost"}
         ]
-
-    def groups():
-        pass
-
+    GROUPS = []  # Derived classes have their own
 
     def __init__(self, args):
         super(Framework, self).__init__(args)

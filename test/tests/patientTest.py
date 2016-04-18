@@ -11,8 +11,9 @@ class PatientPage(Page):
         super(PatientPage, self).__init__()
         self.pageInfo["path"] = "patients"
 
-#@Framework.groups("simple", "example")
+
 class PatientTest(Framework):
+    GROUP = ["simple"]
 
     def runTest(self):
         """Only this method will run if the file is run without unittest"""

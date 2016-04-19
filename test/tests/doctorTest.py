@@ -4,16 +4,10 @@ import unittest
 
 
 class DoctorTest(Framework):
-    GROUP = ["simple", "fast"]
+    GROUP = ["simple", "fast", "example"]
 
-    def runTest(self):
-        print "o"
-
-    def testTest(self):
-        print "eee"
-
-    def testAnother(self):
-        print "another"
+    def testExample(self):
+        self.assertEqual(True, True, "I'll never see the light of day")
 
 if __name__ == '__main__':
     unittest.main()

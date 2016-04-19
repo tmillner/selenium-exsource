@@ -9,24 +9,28 @@ class PatientPage(Page):
 
     def __init__(self):
         super(PatientPage, self).__init__()
-        self.pageInfo["path"] = "patients"
+        self.pageInfo["path"] = "test/resources/patients-test.html"
+
+    def get_first_patient_id(self):
+        return self.driver.find_element_by_id("first_id").text
+
+    def get_first_patient_fname(self):
+        return self.driver.find_element_by_id("first_first-name").text
 
 
 class PatientTest(Framework):
     GROUP = ["simple"]
 
-    def runTest(self):
-        """Only this method will run if the file is run without unittest"""
-        print self.context
-
-    def thisWontRun(self):
-        """This will never run"""
-        print("BOO!")
-
     def test_patient(self):
-        """Only this method will run if ran via TestLoader (discover)"""
-        print "jj"
-        print self.context
+        Page().jump_to(self.contextmap.get("startPage"))
+        pp = PatientPage()
+        patient_id = pp.get_first_patient_id()
+        self.assertEqual(patient_id, self.contextmap.get("firstPatientId"),
+                         "patiend id's don't match")
+        patient_fname = pp.get_first_patient_fname()
+        self.assertEqual(patient_fname,
+                         self.contextmap.get("firstPatientName"),
+                         "patiend id's don't match")
 
 if __name__ == '__main__':
     unittest.main()

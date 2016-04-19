@@ -1,12 +1,14 @@
 {
   "contexts": [
     {"TEST" : {
-        "firstPatientId" : 1,
+        "startPage": "test/resources/patients-test.html",
+        "firstPatientId" : "1",
         "firstPatientName" : "Maitiú"
         }
     },
     {"PROD" : {
-        "firstPatientId" : 100,
+        "startPage": "test/resources/patients-prod.html",
+        "firstPatientId" : "100",
         "firstPatientName" : "Arlene"
       }
     }

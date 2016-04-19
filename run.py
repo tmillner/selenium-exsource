@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#  If running this in virtualenv use the python in it's dir e.g.
+#  python run.py
 import sys
 import os
 import unittest

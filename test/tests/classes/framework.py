@@ -1,6 +1,6 @@
 from unittest import TestCase
-import unittest
 from logger import log
+from driver import Driver
 import inspect
 import json
 import os
@@ -14,24 +14,29 @@ class Framework(TestCase):
 
     TEST_CONTEXT_K = "PYTHON_TEST_CONTEXT"
     TEST_CONTEXT_V = [
-            {"name": "TEST", "domain": "localhost"},
-            {"name": "PROD", "domain": "localhost"}
+            {"name": "TEST", "domain": "localhost", "port": "8080"},
+            {"name": "PROD", "domain": "localhost", "port": "8080"}
         ]
     GROUPS = []  # Derived classes have their own
 
     def __init__(self, args):
         super(Framework, self).__init__(args)
+        log.info("running test " + self.id())
         self.args = args
         self.context = self._get_context()
         if self.context:
-            self.contextmap = self._setup_context(self.context.get("name"))
+            context_name = self.context.get("name")
+            contextmap = self._setup_context(context_name)
+            self.contextmap = contextmap.get(context_name)
         else:
             self.contextmap = {}
+        Driver.CONTEXT = self.context
 
     def setUp(self):
-        pass
+        self._driver = Driver()
 
     def tearDown(self):
+        self._driver.close()
         self.context = None
         self.contextmap = None
 
@@ -52,7 +57,6 @@ class Framework(TestCase):
             derivedfilepath = inspect.getfile(self.__class__)
             derivedfile = os.path.basename(derivedfilepath)
             derivedfilejson = derivedfile.split(".")[0] + ".json"
-            print derivedfilejson
             try:
                 with open(os.path.dirname(
                   derivedfilepath) + "/" + derivedfilejson) as f:
@@ -67,15 +71,12 @@ class Framework(TestCase):
 
     def _find_target_context(self, contextmap):
         """Pick the target context data the test will run with"""
-        log.debug("Loading context map with " + self.context)
+        log.debug("Loading context map with " + str(self.context))
         try:
-            return [o for o in contextmap.get("contexts") if
-                    self.context in o][0]
+            target_context = [o for o in contextmap.get("contexts") if
+                              self.context.get("name") in o][0]
+            return target_context
         except (AttributeError, IndexError) as err:
-            msg = str.format("{}\n{}", "Using context " + self.context,
-                             err.message)
+            msg = str.format("{}\n{}", "Using context " +
+                             self.context.get("name") + err.message)
             exit("Didn't find the target context in the json: " + msg)
-
-
-if __name__ == "__main__":
-    unittest.main()

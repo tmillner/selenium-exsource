@@ -9,7 +9,7 @@ class PatientPage(Page):
 
     def __init__(self):
         super(PatientPage, self).__init__()
-        self.pageInfo["path"] = "test/resources/patients-test.html"
+        self.pageInfo["path"] = "test/resources/patients.html"
 
     def get_first_patient_id(self):
         return self.driver.find_element_by_id("first_id").text

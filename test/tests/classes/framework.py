@@ -63,9 +63,11 @@ class Framework(TestCase):
                     contextmap = json.load(f)
                 return self._find_target_context(contextmap)
             except IOError as err:
+                self.tearDown()
                 msg = str.format("\n{}\n'{}'", err.strerror, err.filename)
                 exit("Attempt to find the external data file failed: " + msg)
             except ValueError as err:
+                self.tearDown()
                 msg = str.format("\n{}", err.message)
                 exit("Invalid json format in input file: " + msg)
 
@@ -77,6 +79,7 @@ class Framework(TestCase):
                               self.context.get("name") in o][0]
             return target_context
         except (AttributeError, IndexError) as err:
+            self.tearDown()
             msg = str.format("{}\n{}", "Using context " +
                              self.context.get("name") + err.message)
             exit("Didn't find the target context in the json: " + msg)
